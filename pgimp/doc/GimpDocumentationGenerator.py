@@ -49,6 +49,7 @@ class GimpDocumentationGenerator:
         self._ordered_gimp_classes = []
 
     def __call__(self):
+        return
         self._document_pdb_module()
         self._output.start_classes()
         self._document_known_gimp_classes()
