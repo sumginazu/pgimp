@@ -49,6 +49,7 @@ class GimpDocumentationGenerator:
         self._ordered_gimp_classes = []
 
     def __call__(self):
+        print('starting install')
         self._document_pdb_module()
         self._output.start_classes()
         self._document_known_gimp_classes()
@@ -117,6 +118,7 @@ class GimpDocumentationGenerator:
         self._output.start_module('pdb')
         pdb_dump = textwrap.dedent(
             """
+            print("starting script")
             from collections import OrderedDict
             from pgimp.gimp.parameter import return_json
 
@@ -124,8 +126,10 @@ class GimpDocumentationGenerator:
 
             num_matches, procedure_names = pdb.gimp_procedural_db_query("", "", "", "", "", "", "")
             methods = sorted(procedure_names)
+            print("iterating through methods")
             for method in methods:
                 blurb, help, author, copyright, date, proc_type, num_args, num_values = pdb.gimp_procedural_db_proc_info(method)
+                print(method)
                 result[method] = OrderedDict()
                 result[method]['blurb'] = blurb
                 result[method]['help'] = help
