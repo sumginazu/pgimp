@@ -146,7 +146,7 @@ class GimpDocumentationGenerator:
 
             return_json(result)
             """)
-        methods = self._execute(pdb_dump, 20)
+        methods = self._execute(pdb_dump, 200)
         for method in methods.keys():
             blurb = methods[method]['blurb']
             help = methods[method]['help']
