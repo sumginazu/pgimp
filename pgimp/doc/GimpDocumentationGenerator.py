@@ -49,7 +49,6 @@ class GimpDocumentationGenerator:
         self._ordered_gimp_classes = []
 
     def __call__(self):
-        return
         self._document_pdb_module()
         self._output.start_classes()
         self._document_known_gimp_classes()
@@ -147,7 +146,7 @@ class GimpDocumentationGenerator:
 
             return_json(result)
             """)
-        methods = {} #self._execute(pdb_dump, 200)
+        methods = self._execute(pdb_dump, 200)
         for method in methods.keys():
             blurb = methods[method]['blurb']
             help = methods[method]['help']
@@ -174,7 +173,7 @@ class GimpDocumentationGenerator:
 
             self._output.method(method, description, parameters, return_values)
 
-    def _execute(self, string: str, timeout_in_seconds: int = 10):
+    def _execute(self, string: str, timeout_in_seconds: int = 200):
         return self._gsr.execute_and_parse_json(string, timeout_in_seconds=timeout_in_seconds)
 
     def _document_gimp_enums(self):
